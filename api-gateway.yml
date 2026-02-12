@@ -2,9 +2,13 @@ server:
   port: 8080
 
 spring:
+  application:
+    name: api-gateway
+
   cloud:
     gateway:
       routes:
+
         - id: patient-service
           uri: lb://patient-service
           predicates:
@@ -14,8 +18,3 @@ spring:
           uri: lb://doctor-service
           predicates:
             - Path=/doctors/**
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
